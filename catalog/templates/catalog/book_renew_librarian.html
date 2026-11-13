@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Продлить выдачу</h1>
+  <p>Книга: {{ book_instance.book.title }}</p>
+  <p>Текущий срок возврата: {{ book_instance.due_back }}</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+  </form>
+{% endblock %}

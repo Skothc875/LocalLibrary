@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Удалить автора?</h1>
+  <p>{{ object }}</p>
+
+  {% if error %}
+    <p>{{ error }}</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Да, удалить</button>
+  </form>
+
+  <p><a href="{% url 'author-detail' object.pk %}">Назад к автору</a></p>
+{% endblock %}

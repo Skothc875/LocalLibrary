@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>All borrowed books</h1>
+
+  <ul>
+    {% for bookinst in bookinstance_list %}
+      <a href="{% url 'renew-book-librarian' bookinst.pk %}">Продлить</a>
+      <li>
+        <a href="{% url 'book-detail' bookinst.book.pk %}">{{ bookinst.book.title }}</a>
+        — {{ bookinst.borrower }} — вернуть до {{ bookinst.due_back }}
+      </li>
+    {% empty %}
+      <li>Выданных книг нет.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

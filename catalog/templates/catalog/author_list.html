@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>All authors</h1>
+
+  {% if perms.catalog.add_author %}
+    <p><a href="{% url 'author-create' %}">Добавить автора</a></p>
+  {% endif %}
+
+  <ul>
+    {% for author in author_list %}
+      <li><a href="{% url 'author-detail' author.pk %}">{{ author }}</a></li>
+    {% empty %}
+      <li>Авторов пока нет.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

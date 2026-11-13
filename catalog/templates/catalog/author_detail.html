@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ author }}</h1>
+  <p>Дата рождения: {{ author.date_of_birth|default:"не указана" }}</p>
+  <p>Дата смерти: {{ author.date_of_death|default:"не указана" }}</p>
+
+  {% if perms.catalog.change_author %}
+    <p><a href="{% url 'author-update' author.pk %}">Изменить автора</a></p>
+  {% endif %}
+
+  {% if perms.catalog.delete_author %}
+    <p><a href="{% url 'author-delete' author.pk %}">Удалить автора</a></p>
+  {% endif %}
+
+  <h2>Книги автора</h2>
+  <ul>
+    {% for book in author.book_set.all %}
+      <li><a href="{% url 'book-detail' book.pk %}">{{ book.title }}</a></li>
+    {% empty %}
+      <li>У этого автора пока нет книг.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
